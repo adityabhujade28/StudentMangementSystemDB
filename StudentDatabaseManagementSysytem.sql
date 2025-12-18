@@ -39,17 +39,15 @@ CREATE TABLE Course (
 CREATE TABLE StudentCourse (
     StudentId INT NOT NULL,
     CourseId INT NOT NULL,
-    EnrollmentDate DATE DEFAULT CAST(GETDATE() AS DATE),
 
+    
     CONSTRAINT PK_StudentCourse PRIMARY KEY (StudentId, CourseId),
 
     CONSTRAINT FK_StudentCourse_Student FOREIGN KEY (StudentId)
-        REFERENCES Student(StudentId)
-        ON DELETE CASCADE,
+        REFERENCES Student(StudentId),
 
     CONSTRAINT FK_StudentCourse_Course FOREIGN KEY (CourseId)
-        REFERENCES Course(CourseId)
-        ON DELETE CASCADE
+        REFERENCES Course(CourseId),
 );
 
 
