@@ -1,14 +1,12 @@
-==== Student Database Management System ====
+==== SQL Queries Scripts ====
 
-This project contains the SQL script for a simple Student Database Management System.
+This Repository contains the SQL script for a simple and small practice projects.
 
 @ Features
-- Create tables for storing student information, course information, Department information
-- Added student records, Department records, Course records.
-- Store details like student name, ID, Age, Enrollment date and more
+- This repository have the Database schema Diagram with actual SQL scripts.
 
 @ How to Use
-1. Open the `StudentDatabaseManagementSysytem.sql` file in your SQL editor 
+1. Open the `filename.sql` file in your SQL editor 
 2. Run the script to create the database and tables.
 3. You can add, update, or delete student records using SQL queries.
 
