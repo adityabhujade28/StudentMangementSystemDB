@@ -119,3 +119,54 @@ SELECT CourseId
 FROM Enrollments
 GROUP BY CourseId
 HAVING COUNT(StudentId) > 1);
+
+
+
+--Windows function and VIEWS 
+
+SELECT s.StudentName, c.CourseName, e.Grade,
+ROW_NUMBER() OVER(PARTITION BY c.CourseName ORDER BY e.Grade DESC) AS RowNum
+FROM Enrollments e
+JOIN Students s ON e.StudentId = s.StudentId
+JOIN Courses c ON e.CourseId = c.CourseId;
+
+
+SELECT s.StudentName, c.CourseName, e.Grade,
+RANK() OVER(PARTITION BY c.CourseName ORDER BY e.Grade DESC) AS RankNo
+FROM Enrollments e
+JOIN Students s ON e.StudentId = s.StudentId
+JOIN Courses c ON e.CourseId = c.CourseId;
+
+SELECT s.StudentName, c.CourseName, e.Grade,
+DENSE_RANK() OVER(PARTITION BY c.CourseName ORDER BY e.Grade DESC) AS DenseRankNo
+FROM Enrollments e
+JOIN Students s ON e.StudentId = s.StudentId
+JOIN Courses c ON e.CourseId = c.CourseId;
+
+
+
+--student course performance view
+CREATE VIEW vw_StudentCoursePerformance AS
+SELECT 
+    s.StudentName,
+    c.CourseName,
+    e.Grade
+FROM Enrollments e
+JOIN Students s ON e.StudentId = s.StudentId
+JOIN Courses c ON e.CourseId = c.CourseId;
+
+select * from vw_StudentCoursePerformance;
+
+
+--average grade per course view
+
+CREATE VIEW vw_CourseAverageGrade AS
+SELECT 
+    c.CourseName,
+    AVG(e.Grade) AS AvgGrade
+FROM Courses c
+JOIN Enrollments e ON c.CourseId = e.CourseId
+GROUP BY c.CourseName;
+
+SELECT * FROM vw_CourseAverageGrade;
+
